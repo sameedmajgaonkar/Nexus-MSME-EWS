@@ -44,3 +44,6 @@ pythonpath = ["."]
 
 [tool.uv]
 package = false
+
+[tool.vercel]
+entrypoint = "src.serving.app:app"
