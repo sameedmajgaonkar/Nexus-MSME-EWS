@@ -1,0 +1,34 @@
+# --- secrets / credentials ---
+.env
+.env.*
+.kaggle/
+kaggle.json
+access_token
+
+# --- data: raw is 2.5GB and re-downloadable; only the serving artifacts are tracked ---
+data/raw/
+data/overrides.db
+data/online_store.db
+data/processed/*
+!data/processed/serving_features.parquet
+!data/processed/serving_features_enriched.parquet
+!data/processed/phase4_scored_test.parquet
+
+# --- python ---
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# --- node / frontend build ---
+frontend/node_modules/
+frontend/dist/
+
+# --- mlops (Phase 10): local MLflow file store; drift reports live under reports/ ---
+mlruns/
+
+# --- misc ---
+reports/
+.DS_Store
+Thumbs.db

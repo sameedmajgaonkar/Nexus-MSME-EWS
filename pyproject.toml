@@ -1,0 +1,46 @@
+[project]
+name = "msme-ews"
+version = "0.2.0"
+description = "MSME Credit Risk Predictive AI — early-warning system (IDBI Innovate 2026, Track 04)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    # Core modeling (Phases 0-4)
+    "pandas",
+    "numpy",
+    "scikit-learn==1.7.2", # optbinning + pickled calibrators require this pin
+    "lightgbm",
+    "optbinning",
+    "shap",
+    "numba>=0.60", # keep the resolver off ancient llvmlite builds
+    "joblib",
+    "pyarrow",
+    # Phase 5 — graph-lite + text enrichment
+    "networkx",
+    "sentence-transformers",
+    "transformers",
+    "torch",
+    # Phase 6 — thin-file specialist
+    "tabpfn",
+    # Phase 8 — serving
+    "fastapi",
+    "uvicorn[standard]",
+    # Phase 10 — MLOps
+    "mlflow",
+    "evidently",
+    # Phase 11 — streaming (Kafka-compatible client for Redpanda; in-process bus is the no-docker fallback)
+    "kafka-python",
+    "requests",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "httpx", # FastAPI TestClient
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.uv]
+package = false

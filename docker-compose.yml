@@ -1,0 +1,48 @@
+# Production-path stack (plan.md §5.4, §14). The app runs fully without Docker:
+# SQLite append-only audit + in-process event bus are the local defaults; setting
+# DATABASE_URL / KAFKA_BOOTSTRAP_SERVERS switches to the services below.
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://ews:ews@postgres:5432/ews
+      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - postgres
+      - redpanda
+      - redis
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ews
+      POSTGRES_PASSWORD: ews
+      POSTGRES_DB: ews
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redpanda:
+    image: redpandadata/redpanda:latest
+    command:
+      - redpanda
+      - start
+      - --smp=1
+      - --memory=512M
+      - --overprovisioned
+      - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr=PLAINTEXT://redpanda:9092
+    ports:
+      - "9092:9092"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:

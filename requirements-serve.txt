@@ -1,0 +1,13 @@
+# Serving-only dependencies (training extras like optbinning/kaggle not needed).
+fastapi
+uvicorn[standard]
+pandas
+numpy
+scikit-learn==1.7.2  # must match the version the calibrators were pickled with
+lightgbm
+shap
+joblib
+pyarrow
+requests      # LLM narrative call (src/explainability/narrative.py)
+kafka-python  # Redpanda/Kafka bus when KAFKA_BOOTSTRAP_SERVERS is set (docker-compose)
+tabpfn        # thin-file specialist path (pulls torch — heavy but load-bearing at /score)

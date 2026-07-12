@@ -1,0 +1,21 @@
+# keep the build context tiny — raw data alone is 2.5GB
+data/raw/
+data/overrides.db
+data/processed/*
+!data/processed/serving_features.parquet
+!data/processed/phase4_scored_test.parquet
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.git/
+.env
+.kaggle/
+notebooks/
+reports/
+scripts/
+tests/
+*.md

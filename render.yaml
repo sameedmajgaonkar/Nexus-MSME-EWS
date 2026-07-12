@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: msme-riskpulse
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/loans
+    autoDeploy: true

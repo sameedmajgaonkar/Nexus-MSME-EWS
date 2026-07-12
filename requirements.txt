@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn==1.7.2  # optbinning 0.20/0.21 still call sklearn's removed force_all_finite kwarg; pin until fixed upstream
+lightgbm
+optbinning
+shap
+networkx
+fastapi
+uvicorn
+streamlit
+pytest
+kaggle
+pyarrow
