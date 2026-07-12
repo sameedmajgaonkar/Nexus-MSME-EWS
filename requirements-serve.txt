@@ -10,4 +10,5 @@ joblib
 pyarrow
 requests      # LLM narrative call (src/explainability/narrative.py)
 kafka-python  # Redpanda/Kafka bus when KAFKA_BOOTSTRAP_SERVERS is set (docker-compose)
-tabpfn        # thin-file specialist path (pulls torch — heavy but load-bearing at /score)
+# tabpfn removed for free-tier hosting (pulls torch ~800MB); set TABPFN_DISABLED=1
+# to gracefully fall back to the hazard model for thin-file loans.

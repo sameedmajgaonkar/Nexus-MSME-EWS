@@ -5,3 +5,8 @@ services:
     plan: free
     healthCheckPath: /api/loans
     autoDeploy: true
+    envVars:
+      - key: TABPFN_DISABLED
+        value: "1"
+      - key: MALLOC_TRIM_THRESHOLD_
+        value: "65536"

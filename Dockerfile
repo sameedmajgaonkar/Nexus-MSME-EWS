@@ -7,7 +7,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # --- Stage 2: python runtime serving API + static frontend ---
-FROM python:3.13-slim
+FROM python:3.12-slim
 WORKDIR /app
 
 # libgomp1 is required by LightGBM at runtime
@@ -18,7 +18,9 @@ COPY requirements-serve.txt .
 RUN pip install --no-cache-dir -r requirements-serve.txt
 
 COPY src/ src/
-COPY models/ models/
+# Copy only needed model files (skip 30MB thin_file_tabpfn.joblib — TabPFN disabled)
+COPY models/hazard.joblib models/calibrators.joblib models/confidence_bands.joblib models/
+COPY models/*.json models/
 COPY data/processed/serving_features.parquet data/processed/
 COPY data/processed/serving_features_enriched.parquet data/processed/
 COPY data/processed/phase4_scored_test.parquet data/processed/

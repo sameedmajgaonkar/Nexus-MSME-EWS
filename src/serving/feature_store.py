@@ -204,3 +204,14 @@ def get_source_counts() -> dict:
 def reset_source_counts() -> None:
     SOURCE_COUNTS["online"] = 0
     SOURCE_COUNTS["offline_fallback"] = 0
+
+
+def clear_cache() -> None:
+    """Release the in-memory offline DataFrame to free RAM (plan.md §13.1).
+
+    Safe to call at any time — get_online_features will reload from parquet
+    on the next cache miss (write-through ensures the online store has all
+    previously-accessed rows).
+    """
+    _OFFLINE_CACHE.clear()
+

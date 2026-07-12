@@ -1,6 +1,7 @@
 # keep the build context tiny — raw data alone is 2.5GB
 data/raw/
 data/overrides.db
+data/online_store.db
 data/processed/*
 !data/processed/serving_features.parquet
 !data/processed/serving_features_enriched.parquet
