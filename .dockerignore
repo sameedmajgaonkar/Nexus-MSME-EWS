@@ -3,6 +3,7 @@ data/raw/
 data/overrides.db
 data/processed/*
 !data/processed/serving_features.parquet
+!data/processed/serving_features_enriched.parquet
 !data/processed/phase4_scored_test.parquet
 frontend/node_modules/
 frontend/dist/
